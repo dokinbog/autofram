@@ -6,6 +6,9 @@ local json = require("dkjson")
 -- API base URL
 local baseUrl = "https://biggamesapi.io/api/collections"
 
+-- Mailbox coordinates (update these values when you have the actual coordinates)
+local mailboxCoordinates = { x = 1234, y = 5678, z = 90 }
+
 -- Function to perform an HTTP GET request
 local function httpGet(url, headers)
     local response_body = {}
@@ -42,19 +45,23 @@ local function httpPost(url, data, headers)
     end
 end
 
--- Function to teleport the user to the mailbox
-local function teleportToMailbox()
-    local url = baseUrl .. "/user/teleport" -- Adjust endpoint if necessary
-    local payload = json.encode({ location = "mailbox" })
+-- Function to teleport the user to specific coordinates
+local function teleportToCoordinates(coords)
+    local url = baseUrl .. "/user/teleportToCoordinates" -- Adjust endpoint if necessary
+    local payload = json.encode({
+        x = coords.x,
+        y = coords.y,
+        z = coords.z
+    })
     local response = httpPost(url, payload)
-    print("Response from teleporting to mailbox: " .. response)
+    print("Response from teleporting to coordinates: " .. response)
     
     -- Check if teleportation was successful
     local result = json.decode(response)
     if result.success then
-        print("Successfully teleported to mailbox.")
+        print("Successfully teleported to coordinates.")
     else
-        error("Failed to teleport to mailbox.")
+        error("Failed to teleport to coordinates.")
     end
 end
 
@@ -103,8 +110,8 @@ end
 local userNameToSend = "liadqjjw"
 local gemCostPerTransfer = 20000
 
--- Teleport the user to the mailbox
-teleportToMailbox()
+-- Teleport the user to the mailbox coordinates
+teleportToCoordinates(mailboxCoordinates)
 
 -- Check gem balance and ensure enough gems
 local balance = getGemBalance()
